@@ -62,9 +62,23 @@ formElement.addEventListener('submit', function(e) {
     //event propagation means if you have an event occurring on a child, it will 'bubble' up the generations of the family in the HTML 
         //we can use this to attach a click event listener to the lis that don't exist on the page yet
 
-document.querySelector('li').addEventListener('click', function() {
-  console.log('An item was clicked');
-});
+        const ul = document.querySelector('ul');
+
+        //event.target allows us to to identify the element that triggered a specific event
+        // .this keyword wouldn't work as it's 'owned' by the ul -- ask yourself what owns this code/causes this code to run. 
+            // Arrow functions bind differently and would bind to the window
+        ul.addEventListener('click', function(event) {
+            if (event.target.localName === 'i') { //isolates the icon (i) with the localName (so it doesn't interact on, say, the space in between the icons)
+                //switch font awesome classes fom 'fa-regular fa-square' to 'fa-regular fa-square-check'
+                    //you want to leave the styles work up to css, updating the CLASS needed for the CSS to apply the styles needed
+                event.target.classList.toggle('fa-square-check'); //add the checkbox (if this class isn't there, add it)
+                event.target.classList.toggle('fa-square'); //remove the checkbox (if this class isn't there, add it)
+            }
+
+
+            //as long as we've clicked on the icon, then: 
+            //toggle between checked/unchecked (aka. done vs. not done)
+        });
 
 
 // BONUS LEVEL:
