@@ -5,7 +5,7 @@ console.log(formElement);
 // add a submit event listener on the form
 formElement.addEventListener('submit', function(e) {
 
-    // stop the page from refreshing when the form is submitted
+    // stop the page from refreshing when the form is submitted (it's looking to send the information to the server)
     e.preventDefault();
     // log out the event object which is generated when the form is submitted:
     console.log(e);
@@ -33,14 +33,14 @@ formElement.addEventListener('submit', function(e) {
             //creating an 'x' to remove
             const removeButton = document.createElement('button');
             removeButton.innerText = "X";
-            // removeButton.appendChild(textX);
 
-            console.log(removeButton);
+            //adding the 'removal' function to get rid of the li for later
+            removeButton.addEventListener('click', function () {
+                removeButton.parentElement.remove();
+            } );
             
             // include a checkbox icon within the li
             liElement.innerHTML = `<i class="fa-regular fa-square"></i>`;
-
-       
 
             //we will create a text node -- this can be added on to properties that are already there (otherwise two innerHTML/text content would override one another)
             const taskContent = document.createTextNode(inputElement.value);
@@ -86,28 +86,6 @@ formElement.addEventListener('submit', function(e) {
                 event.target.classList.toggle('fa-square-check'); //add the checkbox (if this class isn't there, add it)
                 event.target.classList.toggle('fa-square'); //remove the checkbox (if this class isn't there, add it)
             }
-
-
-            //as long as we've clicked on the icon, then: 
-            //toggle between checked/unchecked (aka. done vs. not done)
-        });
-
-        //if a user clicks the X, than the task is deleted
-        ul.addEventListener('click', function(event) {
-            if (event.target.localName === 'button') { //isolates the button with the localName (so it doesn't interact on, say, the space in between the buttons)
-                //switch font awesome classes fom 'fa-regular fa-square' to 'fa-regular fa-square-check'
-                    //you want to leave the styles work up to css, updating the CLASS needed for the CSS to apply the styles needed
-                // event.target.classList.toggle('fa-square-check'); //add the checkbox (if this class isn't there, add it)
-                // event.target.classList.toggle('fa-square'); //remove the checkbox (if this class isn't there, add it)
-                console.log(event);
-                //attempting to isolate the list item to delete it - not working
-                const listItem = event.target.localName('li');
-                console.log(listItem);
-
-                ul.removeChild(event.target.liElement);
-            }
-
-
             //as long as we've clicked on the icon, then: 
             //toggle between checked/unchecked (aka. done vs. not done)
         });
